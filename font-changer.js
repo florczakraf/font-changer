@@ -28,7 +28,7 @@ function stopSelection() {
     document.removeEventListener('click', clickHandler);
 }
 
-browser.runtime.onMessage.addListener((message) => {
+chrome.runtime.onMessage.addListener((message) => {
     console.log(`received message: ${JSON.stringify(message)}`);
 
     if (message.command === "startSelection") {
