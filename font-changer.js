@@ -1,4 +1,7 @@
 const MAX_CLASS_LIST_LENGTH = 3;
+const POPUP_CLASS = "font-changer-popup";
+
+let clickedElements = [];
 
 function getAncestors(element) {
     let elements = [];
@@ -13,18 +16,20 @@ function getAncestors(element) {
 
 function spawnPopup(clickedElements) {
     const popup = document.createElement("div");
-    popup.classList.add("font-changer-popup");
+    popup.classList.add(POPUP_CLASS);
 
     const elementsList = document.createElement("ul");
     elementsList.classList.add("font-changer-list");
 
-    for (const e of clickedElements) {
+    for (const [i, e] of clickedElements.entries()) {
         const listElement = document.createElement("li");
         listElement.classList.add("font-changer-list-element");
         listElement.innerText = e.tagName + " ";
+        listElement.setAttribute("dom-reference", i);
+        listElement.addEventListener("click", applyStyle);
+
         const elementClasses = document.createElement("div");
         elementClasses.classList.add("font-changer-element-classes");
-
         elementClasses.innerText = Array.from(e.classList);
 
         listElement.appendChild(elementClasses);
@@ -35,24 +40,37 @@ function spawnPopup(clickedElements) {
     document.body.appendChild(popup);
 }
 
+function closePopup() {
+    try {
+        document.getElementsByClassName(POPUP_CLASS)[0].remove();
+    }
+    catch {}
+}
 
+function applyStyle() {
+    element = clickedElements[this.getAttribute("dom-reference")];
+    element.style.textAlign = "justify";
+    element.style.fontWeight = "bold";
 
-function applyStyle(element) {
-    element.style.textAlign = 'justify';
-    element.style.fontWeight = 'bold';
+    closePopup();
 }
 
 function clickHandler(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
     const target = event.target;
-    const clickedElements = [target, ... getAncestors(target)];
-    applyStyle(target);  // TODO
+    clickedElements = [target, ... getAncestors(target)];
     stopSelection();
 
     spawnPopup(clickedElements);
+
+    return false;
 }
 
 function startSelection() {
-    document.addEventListener('click', clickHandler, false);
+    closePopup();
+    document.addEventListener('click', clickHandler);
 }
 
 function stopSelection() {
@@ -69,20 +87,22 @@ function setStyles() {
         }
 
         .font-changer-popup {
-            position: absolute;
+            position: fixed;
             width: 600px;
-            height: 400px;
+            max-height: 400px;
             left: 5px;
             top: 5px;
+            border-top: 1px solid #e7e7e7;
             box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-            background-color: #BadBed;
+            background-color: white;
             font-family: sans-serif;
+            z-index: 9999;
         }
 
         .font-changer-list {
             overflow-y: scroll;
             width: 100%;
-            height: 90%;
+            max-height: 300px;
             list-style: none;
 
         }
