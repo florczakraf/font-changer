@@ -1,4 +1,3 @@
-const MAX_CLASS_LIST_LENGTH = 3;
 const POPUP_CLASS = "font-changer-popup";
 
 let clickedElements = [];
@@ -44,11 +43,13 @@ function closePopup() {
     try {
         document.getElementsByClassName(POPUP_CLASS)[0].remove();
     }
-    catch {}
+    catch (e) {
+        // There's no popup when activiting for the first time
+    }
 }
 
 function applyStyle() {
-    element = clickedElements[this.getAttribute("dom-reference")];
+    const element = clickedElements[this.getAttribute("dom-reference")];
     element.style.textAlign = "justify";
     element.style.fontWeight = "bold";
 
@@ -70,11 +71,11 @@ function clickHandler(event) {
 
 function startSelection() {
     closePopup();
-    document.addEventListener('click', clickHandler);
+    document.addEventListener("click", clickHandler);
 }
 
 function stopSelection() {
-    document.removeEventListener('click', clickHandler);
+    document.removeEventListener("click", clickHandler);
 }
 
 function setStyles() {
@@ -134,14 +135,11 @@ function setStyles() {
 }
 
 chrome.runtime.onMessage.addListener((message) => {
-    console.log(`received message: ${JSON.stringify(message)}`);
-
     if (message.command === "startSelection") {
-        console.log('starting selection')
         startSelection();
     }
     else {
-        console.log('unknown message');
+        console.error(`Unknown message: ${JSON.stringify(message)}`);
     }
 });
 setStyles();
