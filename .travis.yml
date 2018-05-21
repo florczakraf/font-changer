@@ -1,0 +1,10 @@
+language: node_js
+
+stages:
+  - lint
+
+before_script:
+  - npm install -g eslint
+
+lint:
+  eslint .
