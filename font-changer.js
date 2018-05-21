@@ -3,7 +3,7 @@ const POPUP_CLASS = "font-changer-popup";
 let clickedElements = [];
 
 function getAncestors(element) {
-    let elements = [];
+    const elements = [];
 
     while (element.parentElement) {
         elements.push(element.parentElement);
@@ -13,7 +13,7 @@ function getAncestors(element) {
     return elements;
 }
 
-function spawnPopup(clickedElements) {
+function spawnPopup() {
     const popup = document.createElement("div");
     popup.classList.add(POPUP_CLASS);
 
@@ -64,7 +64,7 @@ function clickHandler(event) {
     clickedElements = [target, ... getAncestors(target)];
     stopSelection();
 
-    spawnPopup(clickedElements);
+    spawnPopup();
 
     return false;
 }
@@ -79,7 +79,7 @@ function stopSelection() {
 }
 
 function setStyles() {
-    let styles = document.createElement("style");
+    const styles = document.createElement("style");
     const rawStyles = `
         .font-changer-popup * {
             margin: 0;
