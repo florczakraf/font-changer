@@ -6,6 +6,8 @@ node_js:
 install:
   - npm install
 
+script: skip
+
 jobs:
   include:
     - stage: Lint
