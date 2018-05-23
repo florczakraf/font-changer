@@ -10,3 +10,8 @@ jobs:
   include:
     - stage: Lint
       script: make lint
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
