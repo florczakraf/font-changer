@@ -10,6 +10,18 @@ jobs:
   include:
     - stage: Lint
       script: make lint
+    - stage: Build
+      script: make build
+    - stage: Deploy
+      deploy:
+        provider: releases
+        api_key:
+          secure: kiq6Eg54aR/hW9tsvlz1NMWz6JNh63gmFF3JWa0rQqrzw/b5mv0/lzQL2Vc6p9enIAfRskgiZ/ciazYdeTYtyycxo9i/r0wVZTAa9gQrnJQCAFsjJ0BCPr8Z4gLBaerMKN6akuAOZjOV4HGEhKKshm0cK0mzAHSR5qBzqJkgTKF9bWYQQzauybk1uxwWrqveeriFT9/n2JT+aRqtFsCjCt6vDokShHQftau2yFvo4LEnMml1O/bWxtKRhG1la8K9XX1JsMWrmCcQ6kYKtLzcc/Hc63ttvntn+10R1F4GoeUZ6YsR10D3vPbqUXZF4P0yDi31u7YIDFDkosiNzgfYEMFrXSBbWZ4k7BF4isrynWMfqsHnCnwrxl36/gJQV3qe0FnRzAt4nH8+9RpQqeE3SKOqBy+lXGxwsydxu6UZhvYLnXjrZLS76TcbDB/lSNjl01/pBHxzzRoPI9wzflahiO3Yk6SuizPELYrfa5+/ATU2Lp9EMOZd+WdyyiCpdlHttc2OYhaA88bStIwabN2dsP6AdzMCYnJw06l+t4JicJYvcPqVxVfsJRG0rEz7OtsgStmpYbWq95w0MTze50+aSI7/0nTkTnPx8YTxTbi1IPhoJChLDm1+6TaHMaf4/J3AwMl38CWfoojWnfPPbQcvLv+KdaEI70D6fUMAzlFBPQ4=
+        skip_cleanup: true
+        file_glob: true
+        file: dist/*
+        on:
+          tags: true
 
 notifications:
   email:
