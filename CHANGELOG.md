@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased]
+### Added
 - README file.
+- Close popup on url's hash change and browser's history navigation.
 
 ## [0.3.2] - 2018-05-25
 ### Added
