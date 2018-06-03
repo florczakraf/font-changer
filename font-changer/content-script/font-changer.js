@@ -86,3 +86,6 @@ chrome.runtime.onMessage.addListener((message) => {
         console.error(`Unknown message: ${JSON.stringify(message)}`);
     }
 });
+
+window.addEventListener("hashchange", closePopup);
+window.addEventListener("beforeunload", closePopup);
