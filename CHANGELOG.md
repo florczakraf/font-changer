@@ -7,15 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- README file. [#8]
-- Close popup on url's hash change and browser's history navigation. [#13]
+- README file.
+- Close popup on url's hash change and browser's history navigation.
 
 ## [0.3.2] - 2018-05-25
 ### Added
-- CHANGELOG file. [#14]
+- CHANGELOG file.
 
 ### Changed
-- Reorganize project's tree to better reflect addon's structure. [#12]
+- Reorganize project's tree to better reflect addon's structure.
 
 ### Fixed
 - Travis should now upload built extension to GitHub releases on tags.
