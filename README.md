@@ -4,7 +4,7 @@
 Find elements on the page and change their font with just few clicks.
 
 ## Get extension
-- [Firefox Add-ons](https://addons.mozilla.org/addon/jokhgliahkldheenecgebcldmdccco/)
+- [Firefox Add-ons](https://addons.mozilla.org/addon/rf-font-changer/)
 - [Chrome Web Store](https://chrome.google.com/webstore/detail/font-changer/jokhgliahkldheenecgebcldmdcccocp)
 - [Latest release from GitHub](https://github.com/florczakraf/font-changer/releases/latest) -- please note that it might not be accepted into the addon stores.
 
