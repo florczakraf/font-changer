@@ -11,7 +11,7 @@
     left: 5px;
     top: 5px;
     border-top: 1px solid #e7e7e7;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     background-color: white;
     z-index: 9999;
     color: black;
@@ -30,7 +30,7 @@
 }
 
 .font-changer-list-element {
-    border-bottom: 1px solid #e7e7e7;
+    border-top: 1px solid #e7e7e7;
     background-color: white;
     width: 100%;
     padding: 5px;
@@ -51,4 +51,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin-left: 10px;
+}
+
+.font-changer-utils {
+    height: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.font-changer-close-button {
+    width: 20px;
+    text-align: center;
+    cursor: pointer;
 }

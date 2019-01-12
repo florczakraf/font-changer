@@ -17,6 +17,16 @@ function spawnPopup() {
     const popup = document.createElement("div");
     popup.classList.add(POPUP_CLASS);
 
+    const utilsBar = document.createElement("div");
+    utilsBar.classList.add("font-changer-utils");
+    popup.appendChild(utilsBar);
+
+    const closeButton = document.createElement("div");
+    closeButton.innerHTML = "✕";
+    closeButton.classList.add("font-changer-close-button");
+    closeButton.onclick = closePopup;
+    utilsBar.appendChild(closeButton);
+
     const elementsList = document.createElement("ul");
     elementsList.classList.add("font-changer-list");
 
@@ -42,8 +52,7 @@ function spawnPopup() {
 function closePopup() {
     try {
         document.getElementsByClassName(POPUP_CLASS)[0].remove();
-    }
-    catch (e) {
+    } catch (e) {
         // There's no popup when activiting for the first time
     }
 }
@@ -61,7 +70,7 @@ function clickHandler(event) {
     event.stopPropagation();
 
     const target = event.target;
-    clickedElements = [target, ... getAncestors(target)];
+    clickedElements = [target, ...getAncestors(target)];
     stopSelection();
 
     spawnPopup();
@@ -78,11 +87,10 @@ function stopSelection() {
     document.removeEventListener("click", clickHandler);
 }
 
-chrome.runtime.onMessage.addListener((message) => {
+chrome.runtime.onMessage.addListener(message => {
     if (message.command === "startSelection") {
         startSelection();
-    }
-    else {
+    } else {
         console.error(`Unknown message: ${JSON.stringify(message)}`);
     }
 });
