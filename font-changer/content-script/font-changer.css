@@ -64,3 +64,14 @@
     text-align: center;
     cursor: pointer;
 }
+
+.font-changer-styles,
+.font-changer-preview-styles {
+    white-space: normal !important;
+    text-align: justify !important;
+    font-weight: bold !important;
+}
+
+.font-changer-preview-styles {
+    color: green;
+}

@@ -36,6 +36,7 @@ function spawnPopup() {
         listElement.innerText = e.tagName + " ";
         listElement.setAttribute("dom-reference", i);
         listElement.addEventListener("click", applyStyle);
+        listElement.addEventListener("mouseenter", applyPreviewStyle);
 
         const elementClasses = document.createElement("div");
         elementClasses.classList.add("font-changer-element-classes");
@@ -55,14 +56,34 @@ function closePopup() {
     } catch (e) {
         // There's no popup when activiting for the first time
     }
+    removePreview();
+}
+
+function getInterestingElements(root) {
+    const ps = Array.prototype.slice.call(root.getElementsByTagName('p'), 0);
+    const divs = Array.prototype.slice.call(root.getElementsByTagName('div'), 0);
+    return [
+        root,
+        ...ps,
+        ...divs,
+    ];
 }
 
 function applyStyle() {
-    const element = clickedElements[this.getAttribute("dom-reference")];
-    element.style.textAlign = "justify";
-    element.style.fontWeight = "bold";
-
+    const root = clickedElements[this.getAttribute("dom-reference")];
+    getInterestingElements(root).forEach(e => e.classList.add('font-changer-styles'));
     closePopup();
+}
+
+function removePreview() {
+    const previews = document.getElementsByClassName('font-changer-preview-styles');
+    [].forEach.call(previews, e => e.classList.remove('font-changer-preview-styles'));
+}
+
+function applyPreviewStyle() {
+    removePreview();
+    const root = clickedElements[this.getAttribute("dom-reference")];
+    getInterestingElements(root).forEach(e => e.classList.add('font-changer-preview-styles'));
 }
 
 function clickHandler(event) {
